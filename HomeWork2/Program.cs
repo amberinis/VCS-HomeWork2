@@ -22,5 +22,18 @@ namespace HomeWork2
             }
             return inputArray;
         }
+        static bool IsNoDuplicates(int[] inputArray)
+        {
+            int[] tempArray = inputArray;
+            Array.Sort(tempArray);
+            for (int i = 0; i < tempArray.Length - 1; i++)
+            {
+                if (tempArray[i] == tempArray[i + 1])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
