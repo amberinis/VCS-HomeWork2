@@ -6,11 +6,25 @@ namespace HomeWork2
     {
         static void Main()
         {
-            foreach (var item in NumberToArray(1234567))
+            Console.WriteLine(CalcMagicNumber(GetIntNumberInput()));
+        }
+        static int CalcMagicNumber(int multiplNumber)
+        {
+            int[] magicNumberArr;
+            int[] tempNumberArr;
+            int magicNumber = 102344;
+            int tempNumber;
+            do
             {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine();
+                do
+                {
+                    magicNumber += 1;
+                    magicNumberArr = NumberToArray(magicNumber);
+                } while (!IsNoDuplicates(magicNumberArr));
+                tempNumber = magicNumber * multiplNumber;
+                tempNumberArr = NumberToArray(tempNumber);
+            } while (!CompareArrays(magicNumberArr, tempNumberArr));
+            return magicNumber;
         }
         static int[] NumberToArray(int inputNumber)
         {
@@ -18,7 +32,7 @@ namespace HomeWork2
             for (int i = inputArray.Length - 1; i >= 0; i--)
             {
                 inputArray[i] = inputNumber % 10;
-                inputNumber = inputNumber / 10;
+                inputNumber /= 10;
             }
             return inputArray;
         }
@@ -45,7 +59,6 @@ namespace HomeWork2
                 Array.Sort(tempArray2);
                 for (int i = 0; i < tempArray1.Length; i++)
                 {
-
                     if (tempArray1[i] != tempArray2[i])
                     {
                         return false;
@@ -54,7 +67,40 @@ namespace HomeWork2
                 return true;
             }
             return false;
+        }
+        static int GetIntNumberInput()
+        {
+            int inputNumber;
+            string inputString;
+            do
+            {
+                Console.Write($"Please enter number between 0 and 10: ");
+                inputString = Console.ReadLine();
+                while (!IsNumber(inputString))
+                {
+                    Console.Write("Please enter correct number!: ");
+                    inputString = Console.ReadLine();
+                }
+                inputNumber = Convert.ToInt32(inputString);
+            } while (inputNumber <= 0 || inputNumber >= 10);
+            return inputNumber;
+        }
+        static bool IsNumber(string testNumber)
+        {
+            if (string.IsNullOrEmpty(testNumber))
+            {
+                return false;
+            }
 
+            for (int i = 0; i < testNumber.Length; i++)
+            {
+                char testSymbol = testNumber[i];
+                if (!char.IsDigit(testSymbol))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
