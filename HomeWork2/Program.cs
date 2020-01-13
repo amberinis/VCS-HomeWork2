@@ -74,7 +74,7 @@ namespace HomeWork2
             string inputString;
             do
             {
-                Console.Write($"Please enter number between 0 and 10: ");
+                Console.Write($"Please enter number between 1 and 10: ");
                 inputString = Console.ReadLine();
                 while (!IsNumber(inputString))
                 {
@@ -82,7 +82,7 @@ namespace HomeWork2
                     inputString = Console.ReadLine();
                 }
                 inputNumber = Convert.ToInt32(inputString);
-            } while (inputNumber <= 0 || inputNumber >= 10);
+            } while (inputNumber <= 1 || inputNumber >= 10);
             return inputNumber;
         }
         static bool IsNumber(string testNumber)
